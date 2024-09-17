@@ -25,7 +25,7 @@ LifeScheduler::Tag::Tag(std::string& name) :
 
 LifeScheduler::Tag::Tag(std::string& name, unsigned int priority) :
 	m_tagName(name),
-	m_priority(1)
+	m_priority(priority)
 {
 }
 
@@ -51,4 +51,19 @@ void LifeScheduler::Tag::SetPriority(unsigned int newPriority)
 unsigned int LifeScheduler::Tag::GetPriority() const
 {
 	return this->m_priority;
+}
+
+bool LifeScheduler::Tag::operator<(const Tag& right) const
+{
+	if (this->m_priority == right.m_priority)
+	{
+		return this->m_tagName > right.m_tagName;
+	}
+	return this->m_priority > right.m_priority;
+}
+
+bool LifeScheduler::Tag::operator==(const Tag& right) const
+{
+	return this->m_priority == right.m_priority &&
+		this->m_tagName == right.m_tagName;
 }

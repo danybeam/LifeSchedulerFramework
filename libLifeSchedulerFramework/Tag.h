@@ -29,6 +29,10 @@ namespace LifeScheduler
 		void SetPriority(unsigned int newPriority);
 		unsigned int GetPriority() const;
 
+		// Operator overloading
+		bool operator<(const Tag& right) const;
+		bool operator==(const Tag& right) const;
+
 	private:
 		std::string m_tagName;
 		unsigned int m_priority;
