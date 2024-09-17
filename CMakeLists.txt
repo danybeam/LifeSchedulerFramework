@@ -14,9 +14,11 @@ project ("libLifeSchedulerFramework")
 # Add source to this project's executable.
 add_library (${PROJECT_NAME})
 
-target_sources(${PROJECT_NAME} PRIVATE
-"${CMAKE_CURRENT_SOURCE_DIR}/${PROJECT_NAME}/LifeSchedulerFramework.cpp"
-)
+target_sources(${PROJECT_NAME} 
+	PRIVATE
+		"libLifeSchedulerFramework/Tag.h"
+		"libLifeSchedulerFramework/Tag.cpp"
+ "libLifeSchedulerFramework/Item.h" "libLifeSchedulerFramework/Item.cpp")
 
 target_include_directories(${PROJECT_NAME} PUBLIC
 	"$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>"
