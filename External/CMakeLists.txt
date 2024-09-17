@@ -1,9 +1,9 @@
-set(gtest_force_shared_crt on)
-add_subdirectory("googletest")
-
+if(BUILD_TESTING AND (${CMAKE_PROJECT_NAME} STREQUAL ${PROJECT_NAME}))
+	set(gtest_force_shared_crt on)
+	add_subdirectory("googletest")
+endif()
 if(BUILD_TESTING)
 	file(GLOB SRC_FILES "${PROJECT_SOURCE_DIR}/libLifeSchedulerFramework/*.test.cpp")
-	message(STATUS "beep ${SRC_FILES}")
 	add_executable(${PROJECT_NAME}_test
 		${SRC_FILES}
 	)
@@ -14,6 +14,11 @@ if(BUILD_TESTING)
 
 	target_link_libraries(${PROJECT_NAME}_test PRIVATE
 		GTest::gtest_main
+		${PROJECT_NAME}
+	)
+
+	target_include_directories(${PROJECT_NAME}_test PRIVATE
+		"$<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}>"
 	)
 
 	include(GoogleTest)
