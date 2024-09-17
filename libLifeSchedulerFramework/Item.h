@@ -41,6 +41,7 @@ namespace LifeScheduler
 
 		// Operator overloading
 		bool operator<(const Item& right) const;
+		bool operator==(const Item& right) const;
 
 	private:
 		unsigned int m_priority;

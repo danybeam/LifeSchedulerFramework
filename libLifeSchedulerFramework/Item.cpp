@@ -84,7 +84,7 @@ void LifeScheduler::Item::AddWorkUnits(unsigned int workedUnits)
 
 void LifeScheduler::Item::Normalize(unsigned int referenceAmount)
 {
-	this->m_workedUnits -= referenceAmount;
+	this->m_workedUnits = std::max(this->m_workedUnits - referenceAmount,(unsigned int) 0);
 }
 
 bool LifeScheduler::Item::operator<(const Item& right) const
@@ -94,4 +94,11 @@ bool LifeScheduler::Item::operator<(const Item& right) const
 		return (this->m_priority * this->m_tag.GetPriority()) > (right.m_priority * right.m_tag.GetPriority());
 	}
 	return this->m_workedUnits > right.m_workedUnits;
+}
+
+bool LifeScheduler::Item::operator==(const Item& right) const
+{
+	return this->m_name == right.m_name && 
+		this->m_priority == right.m_priority && 
+		this->m_tag == right.m_tag;
 }
