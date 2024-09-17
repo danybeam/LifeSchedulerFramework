@@ -18,7 +18,9 @@ target_sources(${PROJECT_NAME}
 	PRIVATE
 		"libLifeSchedulerFramework/Tag.h"
 		"libLifeSchedulerFramework/Tag.cpp"
- "libLifeSchedulerFramework/Item.h" "libLifeSchedulerFramework/Item.cpp")
+		"libLifeSchedulerFramework/Item.h" 
+		"libLifeSchedulerFramework/Item.cpp"
+)
 
 target_include_directories(${PROJECT_NAME} PUBLIC
 	"$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>"
@@ -29,3 +31,20 @@ if (CMAKE_VERSION VERSION_GREATER 3.12)
 endif()
 
 # TODO: Add tests and install targets if needed.
+include(CTest)
+add_subdirectory("External/googletest")
+
+if(BUILD_TESTING)
+	file(GLOB SRC_FILES "${PROJECT_SOURCE_DIR}/libLifeSchedulerFramework/*.test.cpp")
+	file(GLOB H_FILES "${PROJECT_SOURCE_DIR}/libLifeSchedulerFramework/*.test.cpp")
+	add_executable(${PROJECT_NAME}_test
+		${SRC_FILES}
+		${H_FILES}
+	)
+
+	target_link_libraries(${PROJECT_NAME}_test PRIVATE
+		GTest::gtest_main
+	)
+	include(GoogleTest)
+	gtest_discover_tests(${PROJECT_NAME}_test)
+endif()
