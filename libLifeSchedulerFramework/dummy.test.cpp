@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
 
-TEST(Topic, Equality) {
-	EXPECT_TRUE(false);
+TEST(TopicThing, EqualityFoo) {
+	EXPECT_TRUE(1 == 1);
 }

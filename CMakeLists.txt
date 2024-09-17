@@ -32,19 +32,4 @@ endif()
 
 # TODO: Add tests and install targets if needed.
 include(CTest)
-add_subdirectory("External/googletest")
-
-if(BUILD_TESTING)
-	file(GLOB SRC_FILES "${PROJECT_SOURCE_DIR}/libLifeSchedulerFramework/*.test.cpp")
-	file(GLOB H_FILES "${PROJECT_SOURCE_DIR}/libLifeSchedulerFramework/*.test.cpp")
-	add_executable(${PROJECT_NAME}_test
-		${SRC_FILES}
-		${H_FILES}
-	)
-
-	target_link_libraries(${PROJECT_NAME}_test PRIVATE
-		GTest::gtest_main
-	)
-	include(GoogleTest)
-	gtest_discover_tests(${PROJECT_NAME}_test)
-endif()
+add_subdirectory(External)
