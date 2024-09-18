@@ -20,6 +20,8 @@ target_sources(${PROJECT_NAME}
 		"libLifeSchedulerFramework/Tag.cpp"
 		"libLifeSchedulerFramework/Item.h" 
 		"libLifeSchedulerFramework/Item.cpp"
+		"libLifeSchedulerFramework/ItemList.h"
+		"libLifeSchedulerFramework/ItemList.cpp" 
 )
 
 target_include_directories(${PROJECT_NAME} PUBLIC
