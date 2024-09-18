@@ -20,8 +20,11 @@ namespace LifeScheduler
 	public:
 		// Constructors
 		Item();
+		Item(const char* name);
 		Item(std::string& name);
+		Item(const char* name, unsigned int m_priority);
 		Item(std::string& name, unsigned int m_priority);
+		Item(const char* name, unsigned int m_priority, Tag& m_tag);
 		Item(std::string& name, unsigned int m_priority, Tag& m_tag);
 		virtual ~Item();
 
@@ -41,6 +44,7 @@ namespace LifeScheduler
 
 		// Operator overloading
 		bool operator<(const Item& right) const;
+		bool operator>(const Item& right) const;
 		bool operator==(const Item& right) const;
 
 	private:

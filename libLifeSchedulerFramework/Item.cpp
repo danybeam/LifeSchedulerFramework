@@ -10,8 +10,15 @@
 */
 #include <libLifeSchedulerFramework/Item.h>
 
-LifeScheduler::Item::Item() : 
+LifeScheduler::Item::Item() :
 	m_name("EMPTY"),
+	m_priority(1),
+	m_tag(Tag())
+{
+}
+
+LifeScheduler::Item::Item(const char* name) :
+	m_name(name),
 	m_priority(1),
 	m_tag(Tag())
 {
@@ -24,10 +31,24 @@ LifeScheduler::Item::Item(std::string& name) :
 {
 }
 
+LifeScheduler::Item::Item(const char* name, unsigned int m_priority) :
+	m_name(name),
+	m_priority(m_priority),
+	m_tag(Tag())
+{
+}
+
 LifeScheduler::Item::Item(std::string& name, unsigned int m_priority) :
 	m_name(name),
 	m_priority(m_priority),
 	m_tag(Tag())
+{
+}
+
+LifeScheduler::Item::Item(const char* name, unsigned int m_priority, Tag& m_tag) :
+	m_name(name),
+	m_priority(m_priority),
+	m_tag(m_tag)
 {
 }
 
@@ -84,21 +105,46 @@ void LifeScheduler::Item::AddWorkUnits(unsigned int workedUnits)
 
 void LifeScheduler::Item::Normalize(unsigned int referenceAmount)
 {
-	this->m_workedUnits = std::max(this->m_workedUnits - referenceAmount,(unsigned int) 0);
+	this->m_workedUnits = std::max(this->m_workedUnits - referenceAmount, (unsigned int)0);
 }
 
 bool LifeScheduler::Item::operator<(const Item& right) const
 {
 	if (right.m_workedUnits == this->m_workedUnits)
 	{
-		return (this->m_priority * this->m_tag.GetPriority()) > (right.m_priority * right.m_tag.GetPriority());
+		unsigned int thisCalculatedPriority = this->m_priority * this->m_tag.GetPriority();
+		unsigned int rightCalculatedPriority = right.m_priority * right.m_tag.GetPriority();
+		
+		if (thisCalculatedPriority == rightCalculatedPriority)
+		{
+			return right.m_tag > this->m_tag;
+		}
+
+		return thisCalculatedPriority < rightCalculatedPriority;
+	}
+	return this->m_workedUnits < right.m_workedUnits;
+}
+
+bool LifeScheduler::Item::operator>(const Item& right) const
+{
+	if (right.m_workedUnits == this->m_workedUnits)
+	{
+		unsigned int thisCalculatedPriority = this->m_priority * this->m_tag.GetPriority();
+		unsigned int rightCalculatedPriority = right.m_priority * right.m_tag.GetPriority();
+		
+		if (thisCalculatedPriority == rightCalculatedPriority)
+		{
+			return right.m_tag < this->m_tag;
+		}
+
+		return thisCalculatedPriority > rightCalculatedPriority;
 	}
 	return this->m_workedUnits > right.m_workedUnits;
 }
 
 bool LifeScheduler::Item::operator==(const Item& right) const
 {
-	return this->m_name == right.m_name && 
-		this->m_priority == right.m_priority && 
+	return this->m_name == right.m_name &&
+		this->m_priority == right.m_priority &&
 		this->m_tag == right.m_tag;
 }
