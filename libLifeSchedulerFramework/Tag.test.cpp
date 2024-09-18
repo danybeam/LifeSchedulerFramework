@@ -19,22 +19,40 @@ TEST(TagTests_lessOperand, EqualTags)
 	EXPECT_FALSE(tag < tag);
 }
 
-TEST(TagTests_lessOperand, Tag2LessTag1_priority)
+TEST(TagTests_lessOperand, Tag1LessTag2_priority)
 {
 	std::string name1("Tag1");
 	std::string name2("Tag1");
 	LifeScheduler::Tag tag1(name1, 1);
 	LifeScheduler::Tag tag2(name2, 2);
-	EXPECT_TRUE(tag2 < tag1);
+	EXPECT_TRUE(tag1 < tag2);
 }
 
-TEST(TagTests_lessOperand, Tag2LessTag1_name)
+TEST(TagTests_lessOperand, Tag1LessTag2_name)
 {
 	std::string name1("Tag1");
 	std::string name2("Tag2");
 	LifeScheduler::Tag tag1(name1, 1);
 	LifeScheduler::Tag tag2(name2, 1);
-	EXPECT_TRUE(tag2 < tag1);
+	EXPECT_TRUE(tag1 < tag2);
+}
+
+TEST(TagTests_GreaterOperand, Tag1GreatTag2_priority)
+{
+	std::string name1("Tag1");
+	std::string name2("Tag1");
+	LifeScheduler::Tag tag1(name1, 2);
+	LifeScheduler::Tag tag2(name2, 1);
+	EXPECT_TRUE(tag1 > tag2);
+}
+
+TEST(TagTests_GreaterOperand, Tag1GreatTag2_name)
+{
+	std::string name1("Tag10");
+	std::string name2("Tag1");
+	LifeScheduler::Tag tag1(name1, 1);
+	LifeScheduler::Tag tag2(name2, 1);
+	EXPECT_TRUE(tag1 > tag2);
 }
 
 TEST(TagTests_equalOperand, Tag1EqualsTag2)

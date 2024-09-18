@@ -19,7 +19,9 @@ namespace LifeScheduler
 	public:
 		// Constructors
 		Tag();
+		Tag(const char* name);
 		Tag(std::string& name);
+		Tag(const char* name, unsigned int priority);
 		Tag(std::string& name, unsigned int priority);
 		virtual ~Tag();
 
@@ -31,6 +33,7 @@ namespace LifeScheduler
 
 		// Operator overloading
 		bool operator<(const Tag& right) const;
+		bool operator>(const Tag& right) const;
 		bool operator==(const Tag& right) const;
 
 	private:
