@@ -18,6 +18,9 @@ namespace LifeScheduler
 	class Item
 	{
 	public:
+		// Public constants
+		static const Item c_emptyItem;
+
 		// Constructors
 		Item();
 		Item(const char* name);

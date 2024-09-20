@@ -32,6 +32,8 @@ namespace LifeScheduler
 
 		// Helper funcitons
 		void AddWorkUnits(unsigned int workUnits);
+		// TODO(danybeam) add function to add work units to a specific Item by reference
+		// TODO(danybeam) add function to add work units to a specific Item by index
 		void Normalize();
 
 

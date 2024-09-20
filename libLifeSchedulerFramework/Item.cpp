@@ -100,7 +100,7 @@ unsigned int LifeScheduler::Item::GetWorkedUnits() const
 
 void LifeScheduler::Item::AddWorkUnits(unsigned int workedUnits)
 {
-	this->m_workedUnits += workedUnits;
+	this->m_workedUnits += (workedUnits * this->m_priority * this->m_tag.GetPriority());
 }
 
 void LifeScheduler::Item::Normalize(unsigned int referenceAmount)
@@ -134,6 +134,7 @@ bool LifeScheduler::Item::operator>(const Item& right) const
 		
 		if (thisCalculatedPriority == rightCalculatedPriority)
 		{
+			// TODO(danybeam) if tags are the same add randomness
 			return right.m_tag < this->m_tag;
 		}
 

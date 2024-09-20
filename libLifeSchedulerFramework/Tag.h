@@ -17,6 +17,9 @@ namespace LifeScheduler
 	class Tag
 	{
 	public:
+		// Public constants
+		static const Tag c_emptyTag;
+
 		// Constructors
 		Tag();
 		Tag(const char* name);

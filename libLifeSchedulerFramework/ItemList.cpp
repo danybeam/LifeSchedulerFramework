@@ -23,8 +23,7 @@ LifeScheduler::ItemList::~ItemList()
 
 void LifeScheduler::ItemList::AddItem(Item& newItem)
 {
-	m_itemVector.push_back(newItem);
-	this->Sort();
+	m_itemVector.insert(m_itemVector.begin(), newItem);
 }
 
 void LifeScheduler::ItemList::RemoveItem(int index)
@@ -59,14 +58,17 @@ LifeScheduler::Item& LifeScheduler::ItemList::operator[](int index)
 
 void LifeScheduler::ItemList::AddWorkUnits(unsigned int workUnits)
 {
-	// TODO(danybeam): Implement function
-	throw std::logic_error("Function not implemented");
+	m_itemVector[0].AddWorkUnits(workUnits);
+	Sort();
 }
 
 void LifeScheduler::ItemList::Normalize()
 {
-	// TODO(danybeam): Implement function
-	throw std::logic_error("Function not implemented");
+	unsigned int normalizeValue = m_itemVector[0].GetWorkedUnits();
+	for (auto& item : m_itemVector)
+	{
+		item.Normalize(normalizeValue);
+	}
 }
 
 void LifeScheduler::ItemList::Sort()
